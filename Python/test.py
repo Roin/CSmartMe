@@ -1,19 +1,32 @@
 #/usr/bin/env python
 
-import serial, string, time
+import serial, string, time, re, sqlite3
+import CSMSerialHandler
 
-s = serial.Serial("/dev/ttyUSB0",9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
-s.write("/?!" + chr(13) + chr(10))
-teststring = s.readline()
+#vars
+values = []
+r = re.compile("\((\d*\.\d*)\*")
+connector = sqlite3.connect('test.db')
+c = connector.cursor()
+
+#s = serial.Serial("/dev/ttyUSB0", 9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
+#s.write("/?!" + chr(13) + chr(10))
+s = CSMSerialHandler("/dev/ttyUSB0", 9600)
+s.CSMConnect()
+teststring = s.CSMRead()
 print teststring
 time.sleep(1)
 s.write(chr(6) + "050" + chr(13) + chr(10))
 time.sleep(1)
-print "Hier"
 while 1:
  mystring = s.readline()
- print mystring
+ if(r.search(mystring)):
+   values.append(float(r.search(mystring).group(1)))
+ #print mystring
  if ("!" in mystring):
+	 c.execute("INSERT INTO v(l1, l2, l3, sum) VALUES (?, ?, ?, ? );", (values[4], values[5], values[6], values[7]))
+	 connector.commit()
+	 values=[]
 	 time.sleep(1)
 	 s.write("/?!" + chr(13) + chr(10))
 	 time.sleep(1)
