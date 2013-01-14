@@ -13,6 +13,7 @@ c = connector.cursor()
 #s.write("/?!" + chr(13) + chr(10))
 s = CSMSerialHandler.CSMSerialHandler("/dev/ttyUSB0", 9600)
 s.CSMConnect()
+s.CSMWrite("/?!" + chr(13) + chr(10))
 teststring = s.CSMRead()
 print teststring
 time.sleep(1)
