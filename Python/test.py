@@ -11,7 +11,7 @@ c = connector.cursor()
 
 #s = serial.Serial("/dev/ttyUSB0", 9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
 #s.write("/?!" + chr(13) + chr(10))
-s = CSMSerialHandler("/dev/ttyUSB0", 9600)
+s = CSMSerialHandler.CSMSerialHandler("/dev/ttyUSB0", 9600)
 s.CSMConnect()
 teststring = s.CSMRead()
 print teststring
