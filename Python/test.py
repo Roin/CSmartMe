@@ -16,10 +16,10 @@ s.CSMConnect()
 teststring = s.CSMRead()
 print teststring
 time.sleep(1)
-s.write(chr(6) + "050" + chr(13) + chr(10))
+s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
 time.sleep(1)
 while 1:
- mystring = s.readline()
+ mystring = s.CSMRead()
  if(r.search(mystring)):
    values.append(float(r.search(mystring).group(1)))
  #print mystring
@@ -28,8 +28,8 @@ while 1:
 	 connector.commit()
 	 values=[]
 	 time.sleep(1)
-	 s.write("/?!" + chr(13) + chr(10))
+	 s.CSMWrite("/?!" + chr(13) + chr(10))
 	 time.sleep(1)
-	 s.write(chr(6) + "050" + chr(13) + chr(10))
+	 s.CSMwrite(chr(6) + "050" + chr(13) + chr(10))
 	 time.sleep(1)
 
