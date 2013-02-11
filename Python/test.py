@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-import serial, string, time, re, sqlite3
+import serial, string, time, re, sqlite3, datetime
 import CSMSerialHandler
 
 #vars
@@ -25,7 +25,7 @@ while 1:
    values.append(float(r.search(mystring).group(1)))
  print mystring
  if ("!" in mystring):
-	 c.execute("INSERT INTO v(l1, l2, l3, sum) VALUES (?, ?, ?, ? );", (values[4], values[5], values[6], values[7]))
+	 c.execute("INSERT INTO v(l1, l2, l3, sum, pub_date) VALUES (?, ?, ?, ?, ? );", (values[4], values[5], values[6], values[7], datetime.datetime))
 	 connector.commit()
 	 values=[]
 	 time.sleep(1)
