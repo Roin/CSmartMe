@@ -3,7 +3,13 @@
 <script type="text/javascript"
  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
 </script>
-<script type="text/javascript">
+</head>
+<body>
+   <p> Test </p>
+   <button onClick="stopFunction()">Stop the execution</button>
+   
+ <script type="text/javascript">
+ var myVar = setInterval(Test(), 5000);
  function Test() {
    var data = "Test";
    var request = $.ajax( {
@@ -21,12 +27,15 @@
             textStatus, errorThrown
         );
     });
-}
+  }
+
+  function StopFunction()
+  {
+    clearInterval(myVar);
+  }
  
  
 </script>
-</head>
-<body>
-   <p> Test son of a bitch </p>
+
 </body>
 </html>
