@@ -6,7 +6,7 @@ from csm.models import Data
 
 def index(request):
   t = loader.get_template("index.html")
-  return HttpResponse(t)
+  return HttpResponse(t.render())
   
 def stuff(request):
   message = {"Eins" : "Y0"}
