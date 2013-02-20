@@ -13,8 +13,8 @@
  function Test() {
    var data = "Test";
    var request = $.ajax( {
+     type: "POST",
      url: "/stuff",
-     type: "post",
      data: data
    });
    request.done(function(response, textStatus, jqHXR) {
@@ -27,9 +27,13 @@
             textStatus, errorThrown
         );
     });
+     request.always(function () {
+        // reenable the inputs
+        console.log("We failed terribly -.-");
+    });
   }
 
-  function StopFunction()
+  function stopFunction()
   {
     clearInterval(myVar);
   }
