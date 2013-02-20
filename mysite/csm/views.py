@@ -5,7 +5,7 @@ from django.utils import simplejson
 from csm.models import Data
 
 def index(request):
-  t = loader.get_template(csm/index.html)
+  t = loader.get_template("csm/index.html")
   return HttpResponse(t)
   
 def stuff(request):
