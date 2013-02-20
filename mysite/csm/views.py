@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.utils import simplejson
+from django.views.decorators.csrf import csrf_exempt
 from csm.models import Data
 
 def index(request):
