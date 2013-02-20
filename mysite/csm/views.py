@@ -12,6 +12,7 @@ def index(request):
     })
   return HttpResponse(t.render(c))
   
+@csrf_exempt
 def stuff(request):
   message = {"Eins" : "Y0"}
   json = simplejson.dumps(message)
