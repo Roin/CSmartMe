@@ -5,6 +5,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 from csm.models import Data
 
+@csrf_exempt
 def index(request):
   t = loader.get_template("index.html")
   mylist = Data.objects.all().order_by('-pub_date')[:5]
