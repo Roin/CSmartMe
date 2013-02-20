@@ -12,6 +12,7 @@ def index(request):
   c = Context({
         'mylist': mylist,
     })
+  print "index stuff"
   return HttpResponse(t.render(c))
   
 @csrf_exempt
