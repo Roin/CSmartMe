@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript"
+ src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+</script>
+<script type="text/javascript">
+ function Test() {
+   var data = "Test";
+   var request = $.ajax( {
+     url: "/stuff",
+     type: "post",
+     data: data
+   });
+   request.done(function(response, textStatus, jqHXR) [{
+     console.log("Hooray it worked");
+   });
+}
+ 
+ 
+</script>
+</head>
+<body>
+   window.setInterval(Test(), 5000);
+</body>
+</html>
