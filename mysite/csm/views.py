@@ -18,4 +18,5 @@ def index(request):
 def stuff(request):
   message = {"Eins" : "Y0"}
   json = simplejson.dumps(message)
+  print "Look if I'm here"
   return "Testing Request"
