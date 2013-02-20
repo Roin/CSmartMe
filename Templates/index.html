@@ -17,7 +17,7 @@
    }
    var request = $.ajax( {
      type: "POST",
-     url: "/stuff",
+     url: "stuff/",
      data: data
    });
    request.done(function (response, textStatus, jqXHR){
@@ -33,7 +33,7 @@
     });
      request.always(function () {
         // reenable the inputs
-        console.log("We failed terribly -.-");
+        console.log("stub stub stub");
     });
   }
 
