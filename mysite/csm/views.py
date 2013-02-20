@@ -20,4 +20,4 @@ def stuff(request):
   message = {"Eins" : "Y0"}
   json = simplejson.dumps(message)
   print "Look if I'm here"
-  return HttpRespone("Testing Request")
+  return HttpResponse("Testing Request")
