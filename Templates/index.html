@@ -30,7 +30,6 @@
      request.always(function () {
         // reenable the inputs
         console.log("We failed terribly -.-");
-        document.getElementById("testing").innerHTML="Stoped";
     });
   }
 
@@ -38,7 +37,7 @@
   {
     clearInterval(myVar);
     console.log("Stoped the stuff");
-    
+    document.getElementById("testing").innerHTML="Stoped";
   }
  
  
