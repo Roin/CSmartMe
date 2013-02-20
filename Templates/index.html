@@ -16,13 +16,13 @@
     request.abort();
    }
    var request = $.ajax( {
-     type: "POST",
+     type: "GET",
      url: "stuff/",
      data: data
    });
    request.done(function (response, textStatus, jqXHR){
         // log a message to the console
-        console.log("Hooray, it worked!");
+        console.log(response);
     });
    request.fail(function (jqXHR, textStatus, errorThrown){
         // log the error to the console
