@@ -9,17 +9,21 @@
    <button onClick="stopFunction()">Stop the execution</button>
    
  <script type="text/javascript">
- var myVar = setInterval(Test(), 5000);
+ var request
  function Test() {
    var data = "Test";
+   if(request) {
+    request.abort();
+   }
    var request = $.ajax( {
      type: "POST",
      url: "/stuff",
      data: data
    });
-   request.done(function(response, textStatus, jqHXR) {
-     console.log("Hooray it worked");
-   });
+   request.done(function (response, textStatus, jqXHR){
+        // log a message to the console
+        console.log("Hooray, it worked!");
+    });
    request.fail(function (jqXHR, textStatus, errorThrown){
         // log the error to the console
         console.error(
@@ -39,7 +43,7 @@
     console.log("Stoped the stuff");
     document.getElementById("testing").innerHTML="Stoped";
   }
- 
+ var myVar = setInterval(Test(), 5000);
  
 </script>
 
