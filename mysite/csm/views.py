@@ -6,7 +6,11 @@ from csm.models import Data
 
 def index(request):
   t = loader.get_template("index.html")
-  return HttpResponse(t.render())
+  mylist = Data.objects.all().order_by('-pub_date')[:5]
+  c = Context({
+        'mylist': mylist,
+    })
+  return HttpResponse(t.render(c))
   
 def stuff(request):
   message = {"Eins" : "Y0"}
