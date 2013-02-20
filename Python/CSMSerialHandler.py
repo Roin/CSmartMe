@@ -7,7 +7,7 @@ class CSMSerialHandler:
   def __init__(self, device, baudrate):
     self.dev = device
     self.baud = baudrate
-    CSMConnect()
+    self.CSMConnect()
     
   def CSMConnect(self):
     self.s = serial.Serial(self.dev, self.baud, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE, timeout=2)

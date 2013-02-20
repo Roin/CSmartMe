@@ -25,7 +25,7 @@ while 1:
    values.append(float(r.search(mystring).group(1)))
  print mystring
  if ("!" in mystring):
-	 c.execute("INSERT INTO v(l1, l2, l3, sum, pub_date) VALUES (?, ?, ?, ?, ? );", (values[4], values[5], values[6], values[7], datetime.datetime))
+	 c.execute("INSERT INTO v(l1, l2, l3, sum, pub_date) VALUES (?, ?, ?, ?, ? );", (values[4], values[5], values[6], values[7], datetime.datetime.now()))
 	 connector.commit()
 	 values=[]
 	 time.sleep(1)
