@@ -30,7 +30,7 @@ def stuff(request):
   print message
   mes = {"y0" : "Yo", "He":"Hey"}
   print mes
-  myjson = json.dumps(dict(message))
+  myjson = json.dumps([message])
   print myjson
   #print mylist.l1
   print "Look if I'm here"
