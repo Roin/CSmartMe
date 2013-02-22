@@ -19,7 +19,7 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5].values()
-  message defaultdict(list)
+  message = defaultdict(list)
   for i in mylist:
     message["L1"].append(i["l1"])
     message["L2"].append(i["l2"])
