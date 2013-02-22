@@ -4,6 +4,7 @@ from django.template import Context, loader
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 from csm.models import Data
+from collections import defaultdict
 
 @csrf_exempt
 def index(request):
@@ -18,7 +19,7 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5].values()
-  message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
+  message defaultdict(list)
   for i in mylist:
     message["L1"].append(i["l1"])
     message["L2"].append(i["l2"])
