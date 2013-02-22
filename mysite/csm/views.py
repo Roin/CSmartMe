@@ -20,13 +20,13 @@ def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5].values()
   message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
   for i in mylist:
-    message["L1"] = i["l1"]
-    message["L2"] = i["l2"]
-    message["L3"] = i["l3"]
-    message["Sum"] = i["sum"]
-    message["PubDate"] = i["pub_date"]
+    message["L1"].append(i["l1"])
+    message["L2"].append(i["l2"])
+    message["L3"].append(i["l3"])
+    message["Sum"].append(i["sum"])
+    message["PubDate"].append(i["pub_date"])
   print message
-  #message = {"y0" : "Yo"}
+  message = {"y0" : "Yo"}
   json = simplejson.dumps(message)
   #print mylist.l1
   print "Look if I'm here"
