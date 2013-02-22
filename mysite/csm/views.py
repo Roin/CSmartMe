@@ -26,9 +26,10 @@ def stuff(request):
     message["L3"].append(i["l3"])
     message["Sum"].append(i["sum"])
     message["PubDate"].append(i["pub_date"])
-  print message
+  print message.items()
   mes = {"y0" : "Yo", "He":"Hey"}
-  json = simplejson.dumps(message.items())
+  print mes
+  json = simplejson.dumps(mes)
   #print mylist.l1
   print "Look if I'm here"
   return HttpResponse(json, mimetype='application/json')
