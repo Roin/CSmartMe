@@ -30,7 +30,7 @@ def stuff(request):
   print message
   mes = {"y0" : "Yo", "He":"Hey"}
   print mes
-  json = simplejson.dumps(mes)
+  json = simplejson.dumps(message)
   #print mylist.l1
   print "Look if I'm here"
   return HttpResponse(json, mimetype='application/json')
