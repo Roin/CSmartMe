@@ -19,7 +19,7 @@ def index(request):
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5]
   message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
-  for (i in mylist):
+  for i in mylist.values():
     message["L1"] = i.l1
     message["L2"] = i.l2
     message["L3"] = i.l3
