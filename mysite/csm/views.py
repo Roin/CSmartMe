@@ -17,7 +17,7 @@ def index(request):
   
 @csrf_exempt
 def stuff(request):
-  mylist = Data.objects.all().order_by('-pub_date')[:5]
+  mylist = Data.objects.all().order_by('-pub_date')[:5].values()
   #message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
   #for i in mylist:
   #  message["L1"] = i.l1
