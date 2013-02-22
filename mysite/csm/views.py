@@ -19,7 +19,7 @@ def index(request):
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5]
   message = {"Eins" : "Y0"}
-  json = simplejson.dumps(mylist)
-  print json
+  json = simplejson.dumps(message)
+  print mylist
   print "Look if I'm here"
   return HttpResponse(json, mimetype='application/json')
