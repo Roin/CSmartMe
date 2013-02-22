@@ -1,10 +1,10 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.template import Context, loader
-from django.utils import simplejson
+#from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 from csm.models import Data
-from collections import defaultdict
+import json
 
 @csrf_exempt
 def index(request):
@@ -30,7 +30,7 @@ def stuff(request):
   print message
   mes = {"y0" : "Yo", "He":"Hey"}
   print mes
-  json = simplejson.dumps(message)
+  myjson = json.dumps(message)
   #print mylist.l1
   print "Look if I'm here"
-  return HttpResponse(json, mimetype='application/json')
+  return HttpResponse(myjson, mimetype='application/javascript')
