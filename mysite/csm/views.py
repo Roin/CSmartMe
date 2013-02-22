@@ -19,17 +19,17 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5].values()
-  message = defaultdict(list)
+  message = {"L1" : list, "L2": list, "L3": list, "Sum": list, "PubDate" : list} 
   for i in mylist:
     message["L1"].append(i["l1"])
     message["L2"].append(i["l2"])
     message["L3"].append(i["l3"])
     message["Sum"].append(i["sum"])
     message["PubDate"].append(i["pub_date"])
-  print message.items()
+  print message
   mes = {"y0" : "Yo", "He":"Hey"}
   print mes
-  json = simplejson.dumps(mes)
+  json = simplejson.dumps(message)
   #print mylist.l1
   print "Look if I'm here"
   return HttpResponse(json, mimetype='application/json')
