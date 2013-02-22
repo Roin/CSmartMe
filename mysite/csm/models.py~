@@ -1,7 +1,6 @@
 from django.db import models
 
 class Data(models.Model):
-  id = models.AutoField(primary_key=True)
   l1 = models.FloatField()
   l2 = models.FloatField()
   l3 = models.FloatField()
