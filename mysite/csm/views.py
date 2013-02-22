@@ -26,7 +26,7 @@ def stuff(request):
     message["L2"].append(i["l2"])
     message["L3"].append(i["l3"])
     message["Sum"].append(i["sum"])
-    #message["PubDate"].append(i["pub_date"])
+    message["PubDate"].append(i["pub_date"].strftime('%Y-%m-%dT%H:%M:%S'))
   print message
   mes = {"y0" : "Yo", "He":"Hey"}
   print mes
