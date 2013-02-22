@@ -8,7 +8,7 @@ from csm.models import Data
 @csrf_exempt
 def index(request):
   t = loader.get_template("index.html")
-  mylist = Data.objects.all().order_by('-pub_date')[:5]
+  
   c = Context({
         'mylist': mylist,
     })
@@ -17,7 +17,8 @@ def index(request):
   
 @csrf_exempt
 def stuff(request):
+  mylist = Data.objects.all().order_by('-pub_date')[:5]
   message = {"Eins" : "Y0"}
-  json = simplejson.dumps(message)
+  json = simplejson.dumps(mylist)
   print "Look if I'm here"
-  return HttpResponse("Testing Request")
+  return HttpResponse(json)
