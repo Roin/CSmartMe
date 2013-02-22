@@ -18,14 +18,14 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5]
-  #message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
-  #message["L1"] = mylist.l1
-  #message["L2"] = mylist.l2
-  #message["L3"] = mylist.l3
-  #message["Sum"] = mylist.sum
-  #message["PubDate"] = mylist.pub_date
-  message= {"Yo": "Y0"}
+  message = {"L1": "", "L2": "", "L3": "", "Sum": "", "PubDate": ""}
+  for (i in mylist):
+    message["L1"] = i.l1
+    message["L2"] = i.l2
+    message["L3"] = i.l3
+    message["Sum"] = i.sum
+    message["PubDate"] = i.pub_date
   json = simplejson.dumps(message)
-  print mylist.l1
+  #print mylist.l1
   print "Look if I'm here"
   return HttpResponse(json, mimetype='application/json')
