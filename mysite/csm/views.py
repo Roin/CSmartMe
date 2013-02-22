@@ -19,6 +19,6 @@ def index(request):
 def stuff(request):
   mylist = Data.objects.all().order_by('-pub_date')[:5]
   message = {"Eins" : "Y0"}
-  json = simplejson.dumps(mylist)
+  #json = simplejson.dumps(mylist)
   print "Look if I'm here"
-  return HttpResponse(json)
+  return HttpResponse("Test")
