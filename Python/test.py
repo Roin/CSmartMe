@@ -6,7 +6,7 @@ import CSMSerialHandler
 #vars
 values = []
 r = re.compile("\((\d*\.\d*)\*")
-connector = sqlite3.connect('study.db')
+connector = sqlite3.connect('/home/florian/study.db')
 c = connector.cursor()
 
 #s = serial.Serial("/dev/ttyUSB0", 9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
