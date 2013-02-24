@@ -35,7 +35,7 @@ def stuff(request):
 
   f = open("test.dat", "w")
   #f.writ e("%s \t %s \n" % ('\n'.join([str(i) for i in mydict["L1"]]), '\n'.join([str(i) for i in mydict["L2"]])))
-  for i in  range(0,9):
+  for i in  range(0,len(message["L1"]-1):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i]) + "\t" + str(message["L2"][i]) + "\t" + str(message["L2"][i]))) 
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
   proc.stdin.write('set terminal png \n')
