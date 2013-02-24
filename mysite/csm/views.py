@@ -36,7 +36,7 @@ def stuff(request):
   f = open("/home/florian/test.dat", "w")
   #f.writ e("%s \t %s \n" % ('\n'.join([str(i) for i in mydict["L1"]]), '\n'.join([str(i) for i in mydict["L2"]])))
   for i in  range(0,len(message["L1"])-1):
-	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i]) + "\t" + str(message["L2"][i]) + "\t" + str(message["L2"][i]))) 
+	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 100) + "\t" + str(message["L2"][i] * 100) + "\t" + str(message["L2"][i] * 100 ))) 
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
   proc.stdin.write('set terminal png \n')
   proc.stdin.write('set output \'/home/florian/plotting.png\' \n')
@@ -46,9 +46,9 @@ def stuff(request):
   proc.stdin.write('set timefmt "%d/%m/%H:%M:%S"\n')
   proc.stdin.write('set format x "%d/%m\\n%H:%M:%S"\n')
   proc.stdin.write('set ylabel "Values"\n')
-  #proc.stdin.write('plot %s  with lines \n' % '\t'.join([str(i)  for i in mydict["L1"]]) )
   proc.stdin.write("""plot "/home/florian/test.dat" using 1:2 with linespoints title "Test", \
-		"test.dat" using 1:3 with linespoints title "L2" \n""")
+		"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
+		"/home/florian/test.dat" using 1:4 with linespoints title "L3" "\n""")
   datadict = {"Path": ""}
   datadict["Path"] = "/home/florian/plotting.png"
   myjson = json.dumps(datatict)
