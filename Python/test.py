@@ -12,13 +12,17 @@ c = connector.cursor()
 #s = serial.Serial("/dev/ttyUSB0", 9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
 #s.write("/?!" + chr(13) + chr(10))
 s = CSMSerialHandler.CSMSerialHandler("/dev/ttyUSB0", 9600)
-s.CSMWrite("/?!" + chr(13) + chr(10))
-teststring = s.CSMRead()
-print teststring
-time.sleep(1)
-s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
-time.sleep(1)
+#s.CSMWrite("/?!" + chr(13) + chr(10))
+#teststring = s.CSMRead()
+#print teststring
+#time.sleep(1)
+#s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
+#time.sleep(1)
 while 1:
+ s.CSMWrite("/?!" + chr(13) + chr(10))
+ time.sleep(1)
+ s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
+ time.sleep(1)
  mystring = s.CSMRead()
  print mystring
  if(r.search(mystring)):
@@ -29,8 +33,5 @@ while 1:
 	 connector.commit()
 	 values=[]
 	 time.sleep(1)
-	 s.CSMWrite("/?!" + chr(13) + chr(10))
-	 time.sleep(1)
-	 s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
-	 time.sleep(1)
+	 
 
