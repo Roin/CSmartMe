@@ -49,6 +49,7 @@ def stuff(request):
   proc.stdin.write("""plot "/home/florian/test.dat" using 1:2 with linespoints title "Test", \
 		"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
 		"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
+  proc.stdin.write("quit\n")
   datadict = {"Path": ""}
   datadict["Path"] = "/home/florian/plotting.png"
   myjson = json.dumps(datatict)

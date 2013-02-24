@@ -24,7 +24,6 @@ while 1:
  s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
  time.sleep(1)
  mystring = s.CSMRead()
- print mystring
  if(r.search(mystring)):
    values.append(float(r.search(mystring).group(1)))
  print mystring
