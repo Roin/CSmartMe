@@ -22,8 +22,6 @@ def index(request):
 def stuff(request):
   print datetime.datetime.now().day
   mylist = Data.objects.filter(pub_date__day='25').values()
-  print "Da"
-  print "Hier"
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(i["l1"])
@@ -36,8 +34,6 @@ def stuff(request):
 		shell=True,
 		stdin=subprocess.PIPE,
 		)
-  print message
-
   f = open("/home/florian/test.dat", "w")
   for i in  range(len(message["L1"])-1,len(message["L1"])-10, -1):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
