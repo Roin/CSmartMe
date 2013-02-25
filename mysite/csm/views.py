@@ -36,6 +36,7 @@ def stuff(request):
   f = open("/home/florian/test.dat", "w")
   for i in  range(0,len(message["L1"])-1):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 100) + "\t" + str(message["L2"][i] * 100) + "\t" + str(message["L2"][i] * 100 ))) 
+  f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
   proc.stdin.write('set terminal png \n')
   proc.stdin.write('set output \'/home/florian/plotting.png\' \n')
