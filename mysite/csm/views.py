@@ -3,11 +3,13 @@ from django.http import HttpResponse
 from django.template import Context, loader
 #from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import never_cache
 from csm.models import Data
 import json
 import subprocess
 import datetime
 
+@never_cache
 @csrf_exempt
 def index(request):
   t = loader.get_template("index.html")
@@ -17,7 +19,8 @@ def index(request):
     })
   print "index stuff"
   return HttpResponse(t.render(c))
-  
+
+@never_cache
 @csrf_exempt
 def stuff(request):
   print datetime.datetime.now().day
