@@ -21,11 +21,9 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   print datetime.datetime.now().day
-  mylist = Data.objects.filter(pub_date__day='25')[:10].values()
+  mylist = Data.objects.filter(pub_date__day='25')[len(mylist)-10:len(mylist)].values()
   print "Da"
-  templist = mylist.reverse()[10]
   print "Hier"
-  print templist
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(i["l1"])
