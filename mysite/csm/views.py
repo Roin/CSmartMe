@@ -40,8 +40,8 @@ def stuff(request):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
   f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
-  proc.stdin.write('set terminal svg \n')
-  proc.stdin.write('set output \'/home/florian/plotting.svg\' \n')
+  proc.stdin.write('set terminal png \n')
+  proc.stdin.write('set output \'/home/florian/plotting.png\' \n')
   proc.stdin.write('set grid \n')
   proc.stdin.write('set xlabel "Time" \n')
   proc.stdin.write('set xdata time \n')
@@ -53,7 +53,7 @@ def stuff(request):
 		"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
   proc.stdin.write("quit\n")
   print "Check if finished"
-  datadict = {"Path" : "/home/florian/plotting.svg"}
+  datadict = {"Path" : "/home/florian/plotting.png"}
   myjson = json.dumps(datadict)
   print myjson
   print "Look if I'm here"
