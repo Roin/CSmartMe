@@ -27,7 +27,7 @@ def stuff(request):
     message["L3"].append(i["l3"])
     message["Sum"].append(i["sum"])
     message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
-  print message
+  #print message
   proc = subprocess.Popen(['gnuplot', '-p'],
 		shell=True,
 		stdin=subprocess.PIPE,
@@ -38,8 +38,8 @@ def stuff(request):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 100) + "\t" + str(message["L2"][i] * 100) + "\t" + str(message["L2"][i] * 100 ))) 
   f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
-  proc.stdin.write('set terminal png \n')
-  proc.stdin.write('set output \'/home/florian/plotting.png\' \n')
+  proc.stdin.write('set terminal svg \n')
+  proc.stdin.write('set output \'/home/florian/plotting.svg\' \n')
   proc.stdin.write('set grid \n')
   proc.stdin.write('set xlabel "Time" \n')
   proc.stdin.write('set xdata time \n')
@@ -50,8 +50,8 @@ def stuff(request):
 		"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
 		"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
   proc.stdin.write("quit\n")
-  datadict = {"Path": ""}
-  datadict["Path"] = "/home/florian/plotting.png"
+  print "Check if finished"
+  datadict = {"Path" : "/home/florian/plotting.svg"}
   myjson = json.dumps(datadict)
   print myjson
   print "Look if I'm here"
