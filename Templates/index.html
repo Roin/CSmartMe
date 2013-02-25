@@ -5,7 +5,7 @@
 </script>
 </head>
 <body>
-   <canvas id="myCanvas" width="200" height="100"
+   <canvas id="myCanvas" width="400" height="400"
      style="border:1px solid #000000;">
    </canvas> 
    <p id="testing"></p>
@@ -24,8 +24,12 @@
      data: data
    });
    request.done(function (response, textStatus, jqXHR){
+      var c=document.getElementById("myCanvas");
+      var ctx=c.getContext("2d");
+      var img=document.getElementById(response["Path"]);
+      ctx.drawImage(img,0,0);
         // log a message to the console
-        console.log(response["Path"]);
+      console.log(response["Path"]);
     });
    request.fail(function (jqXHR, textStatus, errorThrown){
         // log the error to the console
