@@ -21,7 +21,7 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   print datetime.datetime.now().day
-  mylist = Data.objects.filter(pub_date__day='25')[:10].values()
+  mylist = Data.objects.filter(pub_date__day='25').values()
   print "Da"
   print "Hier"
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
@@ -39,7 +39,7 @@ def stuff(request):
   print message
 
   f = open("/home/florian/test.dat", "w")
-  for i in  range(0,len(message["L1"])-1):
+  for i in  range(len(message["L1"]-1,len(message["L1"])-10):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
   f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
