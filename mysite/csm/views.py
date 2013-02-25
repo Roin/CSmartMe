@@ -34,6 +34,7 @@ def stuff(request):
 		shell=True,
 		stdin=subprocess.PIPE,
 		)
+  print message
 
   f = open("/home/florian/test.dat", "w")
   for i in  range(0,len(message["L1"])-1):
@@ -52,9 +53,7 @@ def stuff(request):
 		"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
 		"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
   proc.stdin.write("quit\n")
-  print "Check if finished"
   datadict = {"Path" : "/home/florian/plotting.svg"}
   myjson = json.dumps(datadict)
   print myjson
-  print "Look if I'm here"
   return HttpResponse(myjson, mimetype='application/json')
