@@ -52,7 +52,7 @@ def stuff(request):
   proc.stdin.write("quit\n")
   datadict = {"Path": ""}
   datadict["Path"] = "/home/florian/plotting.png"
-  myjson = json.dumps(datatict)
+  myjson = json.dumps(datadict)
   print myjson
   print "Look if I'm here"
   return HttpResponse(myjson, mimetype='application/json')
