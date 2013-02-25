@@ -40,7 +40,7 @@ def stuff(request):
 	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
   f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
-  proc.stdin.write('set terminal svg \n')
+  proc.stdin.write('set terminal svg size 600,400\n')
   proc.stdin.write('set output \'/home/florian/plotting.svg\' \n')
   proc.stdin.write('set grid \n')
   proc.stdin.write('set xlabel "Time" \n')
