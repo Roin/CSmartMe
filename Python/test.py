@@ -11,6 +11,7 @@ c = connector.cursor()
 
 #s = serial.Serial("/dev/ttyUSB0", 9600, serial.SEVENBITS, serial.PARITY_EVEN, serial.STOPBITS_ONE)
 #s.write("/?!" + chr(13) + chr(10))
+c.execute('PRAGMA journal_mode=WAL;')
 s = CSMSerialHandler.CSMSerialHandler("/dev/ttyUSB0", 9600)
 s.CSMWrite("/?!" + chr(13) + chr(10))
 teststring = s.CSMRead()
