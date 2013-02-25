@@ -19,7 +19,7 @@ def index(request):
   
 @csrf_exempt
 def stuff(request):
-  mylist = Data.objects.all().filter(pub_date__day='24')[:10].values()
+  mylist = Data.objects.all().filter(pub_date__day=datetime.datetime.now().day)[:10].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(i["l1"])
@@ -35,7 +35,7 @@ def stuff(request):
 
   f = open("/home/florian/test.dat", "w")
   for i in  range(0,len(message["L1"])-1):
-	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 100) + "\t" + str(message["L2"][i] * 100) + "\t" + str(message["L2"][i] * 100 ))) 
+	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
   f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
   proc.stdin.write('set terminal svg \n')
