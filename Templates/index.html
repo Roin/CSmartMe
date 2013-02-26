@@ -26,11 +26,7 @@
    request.done(function (response, textStatus, jqXHR){
       var c=document.getElementById("myCanvas");
       var ctx=c.getContext("2d");
-      //ctx.save()
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, c.width, c.height);
-      // Restore the transform
-      //ctx.restore();
+      //ctx.clearRect(0, 0, c.width, c.height);
       var img= new Image();
       img.src = response["Path"];
       ctx.drawImage(img, 0, 0);
