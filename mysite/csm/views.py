@@ -26,7 +26,8 @@ def stuff(request):
   print datetime.datetime.now().day
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(hours= 1)
-  mylist = Data.objects.filter(pub_date__range=(now, onehour))[:10].values()
+  print onehour
+  mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(round(i["l1"]*1000, 2))
@@ -58,5 +59,5 @@ def stuff(request):
 	#	"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
   #proc.stdin.write("quit\n")
   myjson = json.dumps(message)
-  print myjson
+  #print myjson
   return HttpResponse(myjson, mimetype='application/json')
