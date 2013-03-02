@@ -3,6 +3,7 @@
 <script type="text/javascript"
  src="http://code.jquery.com/jquery-1.9.1.js">
 </script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
    <canvas id="myCanvas" width="600" height="400"
@@ -11,7 +12,7 @@
    <p id="testing"></p>
    <button onClick="stopFunction()">Stop the execution</button>
    
- <script type="text/javascript">
+ <!--<script type="text/javascript">
  var request
  function Test() {
    var data = "Test";
@@ -45,7 +46,59 @@
         // reenable the inputs
         console.log("stub stub stub");
     });
+  }-->
+  var request
+  function Test(){
+     var data = "Test";
+     if(request) {
+       request.abort();
+     }
+     var request = $.ajax( {
+       type: "GET",
+       url: "stuff/",
+       data: data
+     });
+     request.done(function(response, textStatus, jqXHR) {
+       var chart1 = new Highcharts.Chart({
+          chart: {
+              renderTo: 'container',
+              type: 'line'
+          },
+          title: {
+              text: 'Smart Meter Data'
+          },
+          xAxis: {
+              categories: response["PubDate"]
+          },
+          yAxis: {
+              title: {
+                  text: 'Values'
+              }
+          },
+          series: [{
+              name: 'L1',
+              data: response["L1"]
+          }, {
+              name: 'L2',
+              data: response["L2"]
+          }, {
+	      name: 'L3',
+	      data: response["L3"]
+	      }]
+      });
   }
+  request.fail(function (jqXHR, textStatus, errorThrown){
+        // log the error to the console
+        console.error(
+            "The following error occured: "+
+            textStatus, errorThrown
+        );
+    });
+     request.always(function () {
+        // reenable the inputs
+        console.log("stub stub stub");
+    }); 
+}
 
   function stopFunction()
   {

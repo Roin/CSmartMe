@@ -24,7 +24,9 @@ def index(request):
 @csrf_exempt
 def stuff(request):
   print datetime.datetime.now().day
-  mylist = Data.objects.filter(pub_date__day='25').values()
+  now = datetime.datetime.now()
+  onehour = now - timedelta(hours= 3)
+  mylist = Data.objects.filter(pub_date__range=(onehour, now)[:10].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(i["l1"])
@@ -32,29 +34,29 @@ def stuff(request):
     message["L3"].append(i["l3"])
     message["Sum"].append(i["sum"])
     message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
+  
   #print message
-  proc = subprocess.Popen(['gnuplot', '-p'],
-		shell=True,
-		stdin=subprocess.PIPE,
-		)
-  f = open("/home/florian/test.dat", "w")
-  for i in  range(len(message["L1"])-1,len(message["L1"])-10, -1):
-	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
-  f.close()
+  #proc = subprocess.Popen(['gnuplot', '-p'],
+	#	shell=True,
+	#	stdin=subprocess.PIPE,
+	#	)
+  #f = open("/home/florian/test.dat", "w")
+  #for i in  range(len(message["L1"])-1,len(message["L1"])-10, -1):
+#	f.write("%s \n" % (str(message["PubDate"][i]) + "\t" + str(message["L1"][i] * 1000) + "\t" + str(message["L2"][i] * 1000) + "\t" + str(message["L3"][i] * 1000 ))) 
+ # f.close()
   #f.write("%s \n" % '\t'.join([str(i) for i in mydict["L2"]]))
-  proc.stdin.write('set terminal svg size 600,400\n')
-  proc.stdin.write('set output \'/home/florian/plotting.svg\' \n')
-  proc.stdin.write('set grid \n')
-  proc.stdin.write('set xlabel "Time" \n')
-  proc.stdin.write('set xdata time \n')
-  proc.stdin.write('set timefmt "%d/%m/%H:%M:%S"\n')
-  proc.stdin.write('set format x "%d/%m\\n%H:%M:%S"\n')
-  proc.stdin.write('set ylabel "Values"\n')
-  proc.stdin.write("""plot "/home/florian/test.dat" using 1:2 with linespoints title "Test", \
-		"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
-		"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
-  proc.stdin.write("quit\n")
-  datadict = {"Path" : "/home/florian/plotting.svg"}
-  myjson = json.dumps(datadict)
+  #proc.stdin.write('set terminal svg size 600,400\n')
+  #proc.stdin.write('set output \'/home/florian/plotting.svg\' \n')
+  #proc.stdin.write('set grid \n')
+  #proc.stdin.write('set xlabel "Time" \n')
+  #proc.stdin.write('set xdata time \n')
+  #proc.stdin.write('set timefmt "%d/%m/%H:%M:%S"\n')
+  #proc.stdin.write('set format x "%d/%m\\n%H:%M:%S"\n')
+  #proc.stdin.write('set ylabel "Values"\n')
+  #proc.stdin.write("""plot "/home/florian/test.dat" using 1:2 with linespoints title "Test", \
+	#"/home/florian/test.dat" using 1:3 with linespoints title "L2", \
+	#	"/home/florian/test.dat" using 1:4 with linespoints title "L3" \n""")
+  #proc.stdin.write("quit\n")
+  myjson = json.dumps(message)
   print myjson
   return HttpResponse(myjson, mimetype='application/json')
