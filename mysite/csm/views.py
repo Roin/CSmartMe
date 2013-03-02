@@ -29,10 +29,10 @@ def stuff(request):
   mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
-    message["L1"].append(i["l1"]*1000)
-    message["L2"].append(i["l2"]*1000)
-    message["L3"].append(i["l3"]*1000)
-    message["Sum"].append(i["sum"]*1000)
+    message["L1"].append(round(i["l1"]*1000, 2))
+    message["L2"].append(round(i["l2"]*1000, 2))
+    message["L3"].append(round(i["l3"]*1000, 2))
+    message["Sum"].append(round(i["sum"]*1000, 2))
     message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
   
   #print message
