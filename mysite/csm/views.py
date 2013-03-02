@@ -26,7 +26,7 @@ def stuff(request):
   print datetime.datetime.now().day
   now = datetime.datetime.now()
   onehour = now - timedelta(hours= 3)
-  mylist = Data.objects.filter(pub_date__range=(onehour, now)[:10].values()
+  mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(i["l1"])
