@@ -71,7 +71,9 @@
               type: 'spline',
               events: {
 		load: function () {
-		  var series = this.series[0];
+		  var series1 = this.series[0];
+		  var series2 = this.series[1];
+		  var series3 = this.series[2];
 		  var intrequest;
 		  setInterval(function () {
 		  if(intrequest) {
@@ -83,7 +85,9 @@
 		    data: data
 		  });
 		  intrequest.done(function(response, textStatus, jqXHR) {
-		    series.addPoint(response["PubDate"], response["L1"], true, true);
+		    series1.addPoint(response["PubDate"], response["L1"], true, true);
+		    series2.addPoint(response["PubDate"], response["L2"], true, true);
+		    series3.addPoint(response["PubDate"], response["L3"], true, true);
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
 		    console.error( "The following error occured: "+
