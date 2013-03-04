@@ -82,7 +82,7 @@
 		    data: data
 		  });
 		  intrequest.done(function(response, textStatus, jqXHR) {
-		    series[0].addPoint(response["PubDate"], response["L1"], true, true);
+		    this.series[0].addPoint(response["PubDate"], response["L1"], true, true);
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
 		    console.error( "The following error occured: "+
