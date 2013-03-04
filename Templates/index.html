@@ -63,12 +63,12 @@
      });
      request.done(function(response, textStatus, jqXHR) {
        var chart1 = new Highcharts.Chart({
-       var mychart = this.chart;
           chart: {
               renderTo: 'container',
               type: 'spline',
               events: {
 		load: function () {
+		  var mychart = this.chart;
 		  var series1 = this.series[0];
 		  var series2 = this.series[1];
 		  var series3 = this.series[2];
