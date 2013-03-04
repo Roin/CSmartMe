@@ -112,6 +112,12 @@
                   text: 'Values'
               }
           },
+          tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series1.name +'</b><br/>'+
+                        Highcharts.dateFormat('%d/%m/%H:%M:%S', this.response["PubDate"]) +'<br/>'+
+                }
+            },
           series: [{
               name: 'L1',
               data: response["L1"]
