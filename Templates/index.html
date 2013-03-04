@@ -72,6 +72,7 @@
 		  var series2 = this.series[1];
 		  var series3 = this.series[2];
 		  var category = this.xAxis[0].categories;
+		  var mychart = this.chart;
 		  var intrequest;
 		  setInterval(function () {
 		  if(intrequest) {
@@ -89,8 +90,8 @@
 		    series2.addPoint([response["PubDate"], response["L2"]], false, true);
 		    series3.addPoint([response["PubDate"], response["L3"]], false, true);
 		    category.push(response["PubDate"]);
-		    this.chart.xAxis[0].setCategories(categories, false);
-		    this.chart.redraw();
+		    mychart.xAxis[0].setCategories(categories, false);
+		    mychart.redraw();
 		    
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
