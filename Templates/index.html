@@ -63,6 +63,7 @@
      });
      request.done(function(response, textStatus, jqXHR) {
        var chart1 = new Highcharts.Chart({
+       var mychart = this.chart;
           chart: {
               renderTo: 'container',
               type: 'spline',
@@ -72,7 +73,6 @@
 		  var series2 = this.series[1];
 		  var series3 = this.series[2];
 		  var category = this.xAxis[0].categories;
-		  var mychart = this.chart;
 		  var intrequest;
 		  setInterval(function () {
 		  if(intrequest) {
