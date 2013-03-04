@@ -12,7 +12,7 @@
    
    <div id="container" style="height: 400px"></div>
    <div id="loading">
-     <p><img src="/home/florian/ajax-loader.gif" /> Please Wait</p>
+     <p><img src="" /> Please Wait</p>
    </div>
    <p id="testing"></p>
    <button onClick="stopFunction()">Stop the execution</button>
@@ -113,6 +113,7 @@
     document.getElementById("testing").innerHTML="Stoped";
   }
  $("#loading").ajaxStart(function(){
+    document.getElementById('loading').src="/home/florian/ajax-loader.gif";
     $(this).show();
  }).ajaxComplete(function(){
     $(this).hide();
