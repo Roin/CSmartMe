@@ -64,6 +64,8 @@ def stuff(request):
   #print myjson
   return HttpResponse(myjson, mimetype='application/json')
   
+@never_cache
+@csrf_exempt
 def internal(request):
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(hours= 1)
