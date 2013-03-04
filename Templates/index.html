@@ -89,8 +89,8 @@
 		    series2.addPoint([response["PubDate"], response["L2"]], false, true);
 		    series3.addPoint([response["PubDate"], response["L3"]], false, true);
 		    category.push(response["PubDate"]);
-		    chart.xAxis[0].setCategories(categories, false);
-		    chart.redraw();
+		    this.chart.xAxis[0].setCategories(categories, false);
+		    this.chart.redraw();
 		    
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
