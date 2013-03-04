@@ -104,11 +104,11 @@
 
   function stopFunction()
   {
-    clearInterval(myVar);
+    clearInterval(interval);
     console.log("Stoped the stuff");
     document.getElementById("testing").innerHTML="Stoped";
   }
- var firstcall = Test();
+ $(document).ready(Test());
  var interval = setInterval("Test()", 5000);
  
 </script>
