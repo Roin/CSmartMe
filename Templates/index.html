@@ -102,7 +102,7 @@
           },
           xAxis: {
               type: 'datetime', 
-              categories: response["PubDate"]
+              categories: response["PubDate"].reverse()
           },
           yAxis: {
               title: {
@@ -111,13 +111,13 @@
           },
           series: [{
               name: 'L1',
-              data: response["L1"]
+              data: response["L1"].reverse()
           }, {
               name: 'L2',
-              data: response["L2"]
+              data: response["L2"].reverse()
           }, {
 	      name: 'L3',
-	      data: response["L3"]
+	      data: response["L3"].reverse()
 	      }]
       });
   });
