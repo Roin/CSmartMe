@@ -74,6 +74,7 @@
 		  var series1 = this.series[0];
 		  var series2 = this.series[1];
 		  var series3 = this.series[2];
+		  console.log(series1);
 		  var intrequest;
 		  setInterval(function () {
 		  if(intrequest) {
@@ -112,12 +113,6 @@
                   text: 'Values'
               }
           },
-          tooltip: {
-                formatter: function() {
-                        return '<b>'+ this.series1.name +'</b><br/>'+
-                        Highcharts.dateFormat('%d/%m/%H:%M:%S', this.response["PubDate"]) +'<br/>'
-                }
-            },
           series: [{
               name: 'L1',
               data: response["L1"]
