@@ -69,16 +69,9 @@ def stuff(request):
 def internal(request):
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(hours= 1)
-  print onehour
   mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[:1].values()
   print mylist
-  message = {"L1" : mylist[0]["l1"]*1000, "L2": mylist[0]["l2"]*1000, "L3": mylist[0]["l3"]*1000, "Sum": mylist[0]["sum"]*1000, "PubDate" : mylist[0]["pub_date"].strftime('%d/%m/%H:%M:%S')} 
-  #for i in mylist:
-  #  message["L1"].append(round(i["l1"]*1000, 2))
-  #  message["L2"].append(round(i["l2"]*1000, 2))
-  #  message["L3"].append(round(i["l3"]*1000, 2))
-  #  message["Sum"].append(round(i["sum"]*1000, 2))
-  #  message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
+  message = {"L1" : round(mylist[0]["l1"]*1000, 2), "L2": round(mylist[0]["l2"]*1000,2), "L3": round(mylist[0]["l3"]*1000,2), "Sum": round(mylist[0]["sum"]*1000,2), "PubDate" : mylist[0]["pub_date"].strftime('%d/%m/%H:%M:%S')} 
   print message
   myjson = json.dumps(message)
   return HttpResponse(myjson, mimetype='application/json')
