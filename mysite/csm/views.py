@@ -13,7 +13,9 @@ import datetime
 @csrf_exempt
 def index(request):
   t = loader.get_template("index.html")
-  mylist = Data.objects.all().order_by('-pub_date')[:10]
+  now = datetime.datetime.now()
+  onehour = now - datetime.timedelta(hours= 1)
+  mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
   c = Context({
         'mylist': mylist,
     })

@@ -9,6 +9,9 @@
    <!--<canvas id="myCanvas" width="600" height="400"
      style="border:1px solid #000000;">
    </canvas> -->
+   <div id="loading">
+     <p><img src="static/ajax-loader.gif" /> Please Wait</p>
+   </div>
    <div id="container" style="height: 400px"></div>
    <p id="testing"></p>
    <button onClick="stopFunction()">Stop the execution</button>
@@ -108,6 +111,11 @@
     console.log("Stoped the stuff");
     document.getElementById("testing").innerHTML="Stoped";
   }
+ $("#loading").ajaxStart(function(){
+    $(this).show();
+ }).ajaxStop(function(){
+    $(this).hide();
+ });
  $(document).ready(Test());
  var interval = setInterval("Test()", 5000);
  
