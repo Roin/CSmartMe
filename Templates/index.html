@@ -9,10 +9,11 @@
    <!--<canvas id="myCanvas" width="600" height="400"
      style="border:1px solid #000000;">
    </canvas> -->
+   
+   <div id="container" style="height: 400px"></div>
    <div id="loading">
      <p><img src="/home/florian/ajax-loader.gif" /> Please Wait</p>
    </div>
-   <div id="container" style="height: 400px"></div>
    <p id="testing"></p>
    <button onClick="stopFunction()">Stop the execution</button>
    
@@ -113,7 +114,7 @@
   }
  $("#loading").ajaxStart(function(){
     $(this).show();
- }).ajaxStop(function(){
+ }).ajaxComplete(function(){
     $(this).hide();
  });
  $(document).ready(Test());
