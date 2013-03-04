@@ -78,3 +78,5 @@ def internal(request):
     message["L3"].append(round(i["l3"]*1000, 2))
     message["Sum"].append(round(i["sum"]*1000, 2))
     message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
+  myjson = json.dumps(message)
+  return HttpResponse(myjson, mimetype='application/json')
