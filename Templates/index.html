@@ -90,7 +90,7 @@
 		    series2.addPoint([response["PubDate"], response["L2"]], false, true);
 		    series3.addPoint([response["PubDate"], response["L3"]], false, true);
 		    category.push(response["PubDate"]);
-		    chart1.xAxis[0].setCategories(categories, false);
+		    chart1.xAxis[0].setCategories(category, false);
 		    chart1.redraw();
 		    
 		  });
