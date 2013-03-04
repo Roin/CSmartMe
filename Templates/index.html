@@ -84,9 +84,9 @@
 		  intrequest.done(function(response, textStatus, jqXHR) {
 		    console.log(response["L1"]);
 		    console.log(response["PubDate"]);
-		    series1.addPoint([Date.parse(response["PubDate"]), response["L1"]], true, true);
-		    series2.addPoint([Date.parse(response["PubDate"]), response["L2"]], true, true);
-		    series3.addPoint([Date.parse(response["PubDate"]), response["L3"]], true, true);
+		    series1.addPoint([response["PubDate"], response["L1"]], true, true);
+		    series2.addPoint([response["PubDate"], response["L2"]], true, true);
+		    series3.addPoint([response["PubDate"], response["L3"]], true, true);
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
 		    console.error( "The following error occured: "+
