@@ -71,13 +71,14 @@ def internal(request):
   onehour = now - datetime.timedelta(hours= 1)
   print onehour
   mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[:1].values()
-  message = {"L1" : mylist["l1"], "L2": mylist["l2"], "L3": mylist["l3"], "Sum": mylist["sum"], "PubDate" : mylist["pub_date"]} 
+  print mylist
+  #message = {"L1" : mylist["l1"], "L2": mylist["l2"], "L3": mylist["l3"], "Sum": mylist["sum"], "PubDate" : mylist["pub_date"]} 
   #for i in mylist:
   #  message["L1"].append(round(i["l1"]*1000, 2))
   #  message["L2"].append(round(i["l2"]*1000, 2))
   #  message["L3"].append(round(i["l3"]*1000, 2))
   #  message["Sum"].append(round(i["sum"]*1000, 2))
   #  message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
-  myjson = json.dumps(message)
+  myjson = json.dumps(mylist)
   print message
   return HttpResponse(myjson, mimetype='application/json')
