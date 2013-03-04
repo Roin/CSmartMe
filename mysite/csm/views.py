@@ -25,9 +25,9 @@ def index(request):
 def stuff(request):
   print datetime.datetime.now().day
   now = datetime.datetime.now()
-  onehour = now - datetime.timedelta(hours= 1)
+  onehour = now - datetime.timedelta(days= 10)
   print onehour
-  mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
+  mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10000].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
   for i in mylist:
     message["L1"].append(round(i["l1"]*1000, 2))
