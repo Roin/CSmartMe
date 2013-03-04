@@ -71,6 +71,7 @@
 		  var series1 = this.series[0];
 		  var series2 = this.series[1];
 		  var series3 = this.series[2];
+		  var category = this.xAxis[0].categories;
 		  var intrequest;
 		  setInterval(function () {
 		  if(intrequest) {
@@ -84,9 +85,13 @@
 		  intrequest.done(function(response, textStatus, jqXHR) {
 		    console.log(response["L1"]);
 		    console.log(response["PubDate"]);
-		    series1.addPoint([Date.UTC(response["PubDate"]), response["L1"]], true, true);
-		    series2.addPoint([Date.UTC(response["PubDate"]), response["L2"]], true, true);
-		    series3.addPoint([Date.UTC(response["PubDate"]), response["L3"]], true, true);
+		    series1.addPoint([response["PubDate"], response["L1"]], false, true);
+		    series2.addPoint([response["PubDate"], response["L2"]], false, true);
+		    series3.addPoint([response["PubDate"], response["L3"]], false, true);
+		    categories.push(response["PubDate"]);
+		    chart.xAxis[0].setCategories(categories, false);
+		    chart.redraw();
+		    
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
 		    console.error( "The following error occured: "+
