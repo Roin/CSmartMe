@@ -42,7 +42,7 @@ def stuff(request):
 @csrf_exempt
 def internal(request):
   now = datetime.datetime.now()
-  onehour = now - datetime.timedelta(hours= 1)
+  onehour = now - datetime.timedelta(minutes= 10)
   mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[:1].values()
   message = {"L1" : round(mylist[0]["l1"]*1000, 2), "L2": round(mylist[0]["l2"]*1000,2), "L3": round(mylist[0]["l3"]*1000,2), "Sum": round(mylist[0]["sum"]*1000,2), "PubDate" : mylist[0]["pub_date"].strftime('%d/%m/%H:%M:%S')} 
   print message
