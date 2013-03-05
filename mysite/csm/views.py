@@ -43,7 +43,7 @@ def internal(request):
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(minutes= 10)
   #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
-  mylist = Data.objects.latest('pub_date').values()
+  mylist = Data.objects.latest('pub_date')
   print mylist
   message = {"L1" : round(mylist["l1"]*1000, 2), "L2": round(mylist["l2"]*1000,2), "L3": round(mylist["l3"]*1000,2), "Sum": round(mylist["sum"]*1000,2), "PubDate" : mylist["pub_date"].strftime('%d/%m/%H:%M:%S')} 
   print message
