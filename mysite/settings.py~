@@ -152,5 +152,12 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+    },
+    'formatters': {
+    'simple': {
+     'format': '%(levelname)s %(message)s'
+  }
+  }
+ 
+
 }
