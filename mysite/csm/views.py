@@ -39,7 +39,6 @@ def stuff(request):
   
 @csrf_exempt
 def internal(request):
-  import pdb; pdb.set_trace()
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(minutes= 10)
   #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
