@@ -3,10 +3,8 @@ from django.http import HttpResponse
 from django.template import Context, loader
 #from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.cache import never_cache
 from csm.models import Data
 import json
-import subprocess
 import datetime
 
 @csrf_exempt
@@ -43,11 +41,11 @@ def stuff(request):
 def internal(request):
   now = datetime.datetime.now()
   onehour = now - datetime.timedelta(minutes= 10)
-  #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
+  mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
   print newchar[0]
-  mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('pub_date').latest().values()
+  #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('pub_date').latest().values()
   print mylist
   message = {"L1" : round(mylist["l1"]*1000, 2), "L2": round(mylist["l2"]*1000,2), "L3": round(mylist["l3"]*1000,2), "Sum": round(mylist["sum"]*1000,2), "PubDate" : mylist["pub_date"].strftime('%d/%m/%H:%M:%S')} 
-  #print message
+  print message
   myjson = json.dumps(message)
   return HttpResponse(myjson, mimetype='application/json')
