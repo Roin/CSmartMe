@@ -27,12 +27,13 @@ def stuff(request):
   print onehour
   mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[:20].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
+   #old format: %d/%m/%H:%M:%S
   for i in mylist:
     message["L1"].append(round(i["l1"]*1000, 2))
     message["L2"].append(round(i["l2"]*1000, 2))
     message["L3"].append(round(i["l3"]*1000, 2))
     message["Sum"].append(round(i["sum"]*1000, 2))
-    message["PubDate"].append(i["pub_date"].strftime('%d/%m/%H:%M:%S'))
+    message["PubDate"].append(i["pub_date"].strftime('%H:%M:%S'))
   myjson = json.dumps(message)
   #print myjson
   return HttpResponse(myjson, mimetype='application/json')
@@ -44,7 +45,8 @@ def internal(request):
   #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
   mylist = Data.objects.latest('pub_date')
   print mylist
-  message = {"L1" : round(mylist.l1*1000, 2), "L2": round(mylist.l2*1000,2), "L3": round(mylist.l3*1000,2), "PubDate" : mylist.pub_date.strftime('%d/%m/%H:%M:%S')} 
+  #old format: %d/%m/%H:%M:%S
+  message = {"L1" : round(mylist.l1*1000, 2), "L2": round(mylist.l2*1000,2), "L3": round(mylist.l3*1000,2), "PubDate" : mylist.pub_date.strftime('%H:%M:%S')} 
   print message
   myjson = json.dumps(message)
   return HttpResponse(myjson, mimetype='application/json')
