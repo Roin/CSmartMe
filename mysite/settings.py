@@ -129,7 +129,10 @@ INSTALLED_APPS = (
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake'
+        'LOCATION': 'unique-snowflake',
+        'OPTIONS': {
+	  'MAX_ENTRIES': 100
+	} 
     }
 }
 # A sample logging configuration. The only tangible logging
