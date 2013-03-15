@@ -75,10 +75,11 @@
 		  var series3 = this.series[2];
 		  var category = this.xAxis[0].categories;
 		  var intrequest;
-		  setInterval(function () {
+		 
 		  if(intrequest) {
 		    intrequest.abort();
 		  }
+		  function Internal() {
 		  var intrequest = $.ajax( {
 		    type: "GET",
 		    url: "internal/",
@@ -91,6 +92,7 @@
 		    category.push(response["PubDate"]);
 		    chart1.xAxis[0].setCategories(category, false);
 		    chart1.redraw();
+		    Internal();
 		    
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
@@ -98,7 +100,7 @@
 		    textStatus, errorThrown
 		  );
 		  });
-	         }, 50000);
+		 }
 	       }
 	    }
           },
