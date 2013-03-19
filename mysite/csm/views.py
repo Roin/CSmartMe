@@ -27,7 +27,7 @@ def stuff(request):
   print onehour
   mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[:20].values()
   message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
-   #old format: %d/%m/%H:%M:%S
+  #old format: %d/%m/%H:%M:%S
   for i in mylist:
     message["L1"].append(round(i["l1"]*1000, 2))
     message["L2"].append(round(i["l2"]*1000, 2))
@@ -40,8 +40,8 @@ def stuff(request):
   
 @csrf_exempt
 def internal(request):
-  now = datetime.datetime.now()
-  onehour = now - datetime.timedelta(minutes= 10)
+  #now = datetime.datetime.now()
+  #onehour = now - datetime.timedelta(minutes= 10)
   #mylist = Data.objects.filter(pub_date__range=(onehour, now)).order_by('-pub_date')[1].values()
   mylist = Data.objects.latest('pub_date')
   print mylist
