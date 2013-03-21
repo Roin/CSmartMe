@@ -34,11 +34,12 @@ while 1:
 	 c.execute("INSERT INTO csm_data(l1, l2, l3, sum, pub_date) VALUES (?, ?, ?, ?, ? );", (values[4], values[5], values[6], values[7], datetime.datetime.now()))
 	 connector.commit()
 	 values=[]
-	 time.sleep(1)
+	 time.sleep(20)
 	 s.CSMWrite("/?!" + chr(13) + chr(10))
          time.sleep(1)
          s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
  if len(mystring) == 0:
+   sleep(20)
    s.CSMWrite("/?!" + chr(13) + chr(10))
    time.sleep(1)
    s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
