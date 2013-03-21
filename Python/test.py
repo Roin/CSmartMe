@@ -43,3 +43,4 @@ while 1:
    s.CSMWrite("/?!" + chr(13) + chr(10))
    time.sleep(1)
    s.CSMWrite(chr(6) + "050" + chr(13) + chr(10))
+connector.close()
