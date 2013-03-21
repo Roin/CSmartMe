@@ -94,8 +94,8 @@
 		    category.push(response["PubDate"]);
 		    chart1.xAxis[0].setCategories(category, false);
 		    chart1.redraw();
-		    var interval = window.setTimeout(function() { },30000);
-		    Internal();
+		    var interval = window.setTimeout(function() { Internal(); },30000);
+		    //Internal();
 		    
 		  });
 		  intrequest.fail(function(response, textStatus, errorThrown) {
