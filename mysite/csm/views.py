@@ -50,3 +50,7 @@ def internal(request):
   print message
   myjson = json.dumps(message)
   return HttpResponse(myjson, mimetype='application/json')
+  
+@csrf_exempt
+def export(request):
+  pass

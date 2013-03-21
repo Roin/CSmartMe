@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home/florian/(?P<path>.*)$', 'django.views.static.serve',
       {'document_root': settings.MEDIA_ROOT}),
+    url(r'^csm/internal/.*', 'csm.views.internal'),
     url(r'^csm/stuff/.*', 'csm.views.stuff'),
     url(r'^csm/', 'csm.views.index'),
 
