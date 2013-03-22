@@ -53,4 +53,4 @@ def internal(request):
   
 @csrf_exempt
 def export(request):
-  pass
+  return HttpResponse("Test")
