@@ -53,4 +53,9 @@ def internal(request):
   
 @csrf_exempt
 def export(request):
-  return HttpResponse("Test")
+  t = loader.get_template("export.html")
+  c = Context({
+        'mylist': "Test",
+    })
+  print "export stuff"
+  return HttpResponse(t.render(c))
