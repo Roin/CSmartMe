@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js">
-</script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
    <!--<canvas id="myCanvas" width="600" height="400"
@@ -55,6 +57,7 @@
 	      data: response["L3"].reverse()
 	      }]
       });
+      console.log(chart1);
   });
   request.fail(function (jqXHR, textStatus, errorThrown){
         // log the error to the console
@@ -79,8 +82,13 @@
  //var interval = setInterval("Test()", 5000);
  
 </script>
+<script>
+	$(document).ready(function () {
+		$("#datepicker").datepicker();
+	});
+</script>
 <form autocomplete="on" action="/export/" method="post">
-  <input type="date" />
+  	<p>Date: <input id="datepicker" type="text"></p>
 </form>
 
 
