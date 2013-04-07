@@ -59,3 +59,6 @@ def export(request):
     })
   print "export stuff"
   return HttpResponse(t.render(c))
+  
+def plot(request):
+  return HttpResponse("Test")

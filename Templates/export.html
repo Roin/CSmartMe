@@ -1,94 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="jquery.ui.datepicker-de.js"></script>
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-   <!--<canvas id="myCanvas" width="600" height="400"
-     style="border:1px solid #000000;">
-   </canvas> -->
-   
-<div id="container" style="height: 400px"></div>
-<script type="text/javascript">
-  var request;
-  function Test(){
-     if(request) {
-       request.abort();
-     }
-     var request = $.ajax( {
-       type: "GET",
-       url: "stuff/",
-       data: data
-     });
-     request.done(function(response, textStatus, jqXHR) {
-       var chart1 = new Highcharts.Chart({
-          chart: {
-              renderTo: 'container',
-              type: 'spline',
-              zoomType: 'x',
-          },
-          title: {
-              text: 'Smart Meter Data'
-          },
-          xAxis: {
-              
-              gridLineWidth: 1,
-              type: 'datetime', 
-              categories: response["PubDate"].reverse()
-          },
-          yAxis: {
-              gridLineWidth: 1,
-              title: {
-                  text: 'Values'
-              }
-          },
-          series: [{
-              name: 'L1',
-              data: response["L1"].reverse()
-          }, {
-              name: 'L2',
-              data: response["L2"].reverse()
-          }, {
-	      name: 'L3',
-	      data: response["L3"].reverse()
-	      }]
-      });
-      console.log(chart1);
-  });
-  request.fail(function (jqXHR, textStatus, errorThrown){
-        // log the error to the console
-        console.error(
-            "The following error occured: "+
-            textStatus, errorThrown
-        );
-    });
-  request.always(function () {
-        // reenable the inputs
-        console.log("stub stub stub");
-    }); 
-}
-
-  function stopFunction()
-  {
-    clearInterval(interval);
-    console.log("Stoped the stuff");
-    document.getElementById("testing").innerHTML="Stoped";
-  }
- $(document).ready(Test());
- //var interval = setInterval("Test()", 5000);
- 
-</script>
 <script>
 	$(document).ready(function () {
-		$("#datepicker").datepicker();
+		$("#datepicker1").datepicker();
+		$("#datepicker1").datepicker( $.datepicker.regional[ "de" ] );
+		$("#datepicker2").datepicker();
+		$("#datepicker2").datepicker( $.datepicker.regional[ "de" ] );
 	});
 </script>
-<form autocomplete="on" action="/export/" method="post">
-  	<p>Date: <input id="datepicker" type="text"></p>
+<form autocomplete="on" action="/plot/" method="post">
+	{% csrf_token %}
+  	<p>Startdatum: <input id="datepicker1" type="text" /></p>
+  	<p>Enddatum: <input id="datepicker2" type="text" /></p>
+  	<p>Aggregieren: <input id="aggregate" type="checkbox" /></p>
+  	<p><input type="submit" value="Export" /></p>
 </form>
 
 
