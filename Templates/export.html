@@ -27,8 +27,8 @@
 		$('#form').submit(function() { // catch the form's submit event
 		$.ajax({ // create an AJAX call...
                 data: $(this).serialize(), // get the form data
-                type: $(this).attr('POST'), // GET or POST
-                url: $(this).attr('/plot'), // the file to call
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
                 success: function(response) { // on success..
                     console.log("Woo");
                 }
@@ -38,7 +38,7 @@
 	});
 	
 </script>
-<form id="form" autocomplete="on" onSubmit="doPlot();">
+<form id="form" autocomplete="on" method="POST" action="/plot/">
 	{% csrf_token %}
   	<p>Startdatum: <input id="datepicker1" type="text" /> <input id="timepicker1" type="text" /></p>
   	<p>Enddatum: <input id="datepicker2" type="text" /> <input id="timepicker2" type="text" /></p>
