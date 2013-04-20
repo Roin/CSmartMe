@@ -60,6 +60,8 @@ def export(request):
   print "export stuff"
   return HttpResponse(t.render(c))
   
+ 
+@csrf_exempt 
 def plot(request):
   if request.method == 'POST':
     print request.POST
