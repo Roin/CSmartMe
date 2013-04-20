@@ -27,7 +27,7 @@
 	});
 	var request;
 	function doPlot() {
-	var data = $("form").serialize();
+	var data = $("#form").serialize();
 	console.log(data);
 	if(request) {
 	  request.abort();
@@ -93,7 +93,7 @@
     });
     }
 </script>
-<form autocomplete="on" onSubmit="doPlot();">
+<form id="form" autocomplete="on" onSubmit="doPlot();">
 	{% csrf_token %}
   	<p>Startdatum: <input id="datepicker1" type="text" /> <input id="timepicker1" type="text" /></p>
   	<p>Enddatum: <input id="datepicker2" type="text" /> <input id="timepicker2" type="text" /></p>
