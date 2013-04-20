@@ -24,81 +24,26 @@
 		$("#timepicker1").timepicker( $.timepicker.regional[ "de" ] );
 		$("#timepicker2").timepicker();
 		$("timepicker2").timepicker( $.timepicker.regional[ "de" ] );
+		$('#form').submit(function() { // catch the form's submit event
+		$.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('POST'), // GET or POST
+                url: $(this).attr('/plot'), // the file to call
+                success: function(response) { // on success..
+                    console.log("Woo");
+                }
+            });
+            return false;
+        });
 	});
-	var request;
-	function doPlot() {
-	var data = $("#form").serialize();
-	console.log(data);
-	if(request) {
-	  request.abort();
-	}
-	var request = $.ajax( {
-	  type: "POST",
-	  url: "/plot/",
-	  data: data
-	});
-	request.done(function (response, textStatus, jqXHR){
-	 var chart1 = new Highcharts.Chart({
-          chart: {
-              renderTo: 'container',
-              type: 'spline',
-              zoomType: 'x',
-          },
-          title: {
-              text: 'Smart Meter Data'
-          },
-          xAxis: {
-              
-              gridLineWidth: 1,
-              type: 'datetime', 
-              categories: response["PubDate"].reverse()
-          },
-          yAxis: {
-              gridLineWidth: 1,
-              title: {
-                  text: 'Values'
-              }
-          },
-          series: [{
-              name: 'L1',
-              data: response["L1"].reverse()
-          }, {
-              name: 'L2',
-              data: response["L2"].reverse()
-          }, {
-	      name: 'L3',
-	      data: response["L3"].reverse()
-	      }]
-      });
-	  var c=document.getElementById("myCanvas");
-	  var ctx=c.getContext("2d");
-	  //ctx.clearRect(0, 0, c.width, c.height);
-	  var img= new Image();
-	  img.src = response["Path"];
-	  ctx.drawImage(img, 0, 0);
-     
-	   // log a message to the console
-	  console.log(response["Path"]);
-    });
-   request.fail(function (jqXHR, textStatus, errorThrown){
-        // log the error to the console
-        console.error(
-            "The following error occured: "+
-            textStatus, errorThrown
-        );
-    });
-     request.always(function () {
-        // reenable the inputs
-        console.log("stub stub stub");
-    });
-    }
+	
 </script>
 <form id="form" autocomplete="on" onSubmit="doPlot();">
 	{% csrf_token %}
   	<p>Startdatum: <input id="datepicker1" type="text" /> <input id="timepicker1" type="text" /></p>
   	<p>Enddatum: <input id="datepicker2" type="text" /> <input id="timepicker2" type="text" /></p>
   	<p>Aggregieren: <input id="aggregate" type="checkbox" /></p>
-  	<p><input type="button" value="Export" onClick="doPlot()" /></p>
+  	<p><input type="submit" value="Export"  /></p>
 </form>
 <div id="container" style="height: 400px;display: none" ></div>
 <canvas id="canvas" width="1000px" height="600px" style="display:none;"></canvas> 
