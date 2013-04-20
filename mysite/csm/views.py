@@ -61,4 +61,6 @@ def export(request):
   return HttpResponse(t.render(c))
   
 def plot(request):
+  if request.method == 'POST':
+    print request.POST
   return HttpResponse("Test")
