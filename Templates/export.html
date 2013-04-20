@@ -41,8 +41,8 @@
 </script>
 <form id="form" autocomplete="on" method="POST" action="plot/">
 	{% csrf_token %}
-  	<p>Startdatum: <input id="datepicker1" type="text" /> <input id="timepicker1" type="text" /></p>
-  	<p>Enddatum: <input id="datepicker2" type="text" /> <input id="timepicker2" type="text" /></p>
+  	<p>Startdatum: <input id="datepicker1" type="text" name="datepicker1"  /> <input id="timepicker1" type="text" /></p>
+  	<p>Enddatum: <input id="datepicker2" type="text" name="datepicker2" /> <input id="timepicker2" type="text" /></p>
   	<p>Aggregieren: <input id="aggregate" type="checkbox" /></p>
   	<p><input type="submit" value="Export"  /></p>
 </form>

@@ -65,4 +65,4 @@ def export(request):
 def plot(request):
   if request.method == 'POST':
     print request.POST
-  return HttpResponse("Test")
+  return HttpResponse("Test: test", mimetype="application/json")
