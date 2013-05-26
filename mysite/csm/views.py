@@ -14,7 +14,7 @@ def index(request):
   onehour = now - datetime.timedelta(hours= 1)
   mylist = Data.objects.filter(pub_date__range=(onehour, now))[:10].values()
   c = Context({
-        'mylist': mylist,
+        'mylist': mylist,	
     })
   print "index stuff"
   return HttpResponse(t.render(c))
@@ -63,6 +63,26 @@ def export(request):
  
 @csrf_exempt 
 def plot(request):
+  from time import strptime
   if request.method == 'POST':
     print request.POST
-  return HttpResponse("Test: test", mimetype="application/json")
+    if request.POST["aggregate"] == "on":
+      print "aggregate is on"
+      s1 = request.POST["datepicker1"] + 'T' + request.POST["timepicker1"]
+      st = datetime.datetime.strptime(s1, "%d.%m.%YT%H:%M")
+      print st
+      s2 = request.POST["datepicker2"] + 'T' + request.POST["timepicker2"]
+      st2 =  datetime.datetime.strptime(s2, "%d.%m.%YT%H:%M")
+      print st2
+      mylist = Data.objects.filter(pub_date__range=(st,st2)).order_by('-pub_date').values();
+      print "Y0y0y0y0"
+      message = {"L1" : [], "L2": [], "L3": [], "Sum": [], "PubDate" : []} 
+      for i in mylist:
+	message["L1"].append(round(i["l1"]*1000, 2))
+	message["L2"].append(round(i["l2"]*1000, 2))
+	message["L3"].append(round(i["l3"]*1000, 2))
+	message["Sum"].append(round(i["sum"]*1000, 2))
+	message["PubDate"].append(i["pub_date"].strftime('%H:%M:%S'))
+  myjson = json.dumps(message)
+  print "done"
+  return HttpResponse(myjson, mimetype="application/json")

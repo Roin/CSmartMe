@@ -4,17 +4,21 @@
 <meta charset="utf-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="jquery.ui.datepicker-de.js"></script>
-<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
-<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
+<script type="text/javascript" src="/static/jquery-ui-1.10.2/ui/minified/jquery-ui.min.js"> </script>
+<script type="text/javascript" src="/static/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/static/jquery-ui-1.10.2/ui/i18n/jquery.ui.datepicker-de.js"></script>
+<script type="text/javascript" src="/static/rgbcolor.js"></script>
+<script type="text/javascript" src="/static/canvg.js"></script>
+<!--<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
+<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> -->
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" />
+<link href="/static/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" />
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>-->
+<!--<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>-->
 </head>
 <body>
 <script>
+	var request;
 	$(document).ready(function () {
 		$("#datepicker1").datepicker();
 		$("#datepicker1").datepicker( $.datepicker.regional[ "de" ] );
@@ -24,9 +28,13 @@
 		$("#timepicker1").timepicker( $.timepicker.regional[ "de" ] );
 		$("#timepicker2").timepicker();
 		$("timepicker2").timepicker( $.timepicker.regional[ "de" ] );
-		$('#form').submit(function() {  // catch the form's submit event
+		$('#form').submit(function() {
+		// catch the form's submit event
+		 if(request) {
+		  request.abort();
+		}
 		console.log($(this).serialize());
-		$.ajax({ // create an AJAX call...
+		var request = $.ajax({ // create an AJAX call...
                 data: $(this).serialize(), // get the form data
                 type: $(this).attr('method'), // GET or POST
                 url: $(this).attr('action'), // the file to call
@@ -34,20 +42,65 @@
                     console.log("Woo");
                 }
             });
-            return false;
+            request.done(function(response, textStatus, jqXHR) {
+            var chart1 = new Highcharts.Chart({
+	    chart: {
+              renderTo: 'container',
+              type: 'spline',
+              zoomType: 'x',
+            },
+            title: {
+              text: 'Smart Meter Data'
+          },
+          xAxis: {
+              
+              gridLineWidth: 1,
+              type: 'datetime', 
+              categories: response["PubDate"].reverse()
+          },
+          yAxis: {
+              gridLineWidth: 1,
+              title: {
+                  text: 'Values'
+              }
+          },
+          series: [{
+              name: 'L1',
+              data: response["L1"].reverse()
+          }, {
+              name: 'L2',
+              data: response["L2"].reverse()
+          }, {
+	      name: 'L3',
+	      data: response["L3"].reverse()
+	      }]
+	  });
+            
         });
+        return false;
 	});
-	
+	document.get
+	document.getElementById("canvas").style.display = "none";
+	document.getElementById("container").style.display = "inline";
+	});
+function meh() {
+  document.getElementById("canvas").style.display = "inline";
+  document.getElementById("container").style.display = "none";
+  canvg('canvas', $('#container .highcharts-container').html());
+  var data = document.getElementById("canvas").toDataURL("image/png").replace("image/png", "image/octet-stream");
+  window.location.href = data;
+}
 </script>
 <form id="form" autocomplete="on" method="POST" action="plot/">
 	{% csrf_token %}
-  	<p>Startdatum: <input id="datepicker1" type="text" name="datepicker1"  /> <input id="timepicker1" type="text" /></p>
-  	<p>Enddatum: <input id="datepicker2" type="text" name="datepicker2" /> <input id="timepicker2" type="text" /></p>
-  	<p>Aggregieren: <input id="aggregate" type="checkbox" /></p>
-  	<p><input type="submit" value="Export"  /></p>
+  	<p>Startdatum: <input id="datepicker1" type="text" name="datepicker1"  /> <input id="timepicker1" type="text" name="timepicker1" /></p>
+  	<p>Enddatum: <input id="datepicker2" type="text" name="datepicker2" /> <input id="timepicker2" type="text" name="timepicker2" /></p>
+  	<p>Aggregieren: <input id="aggregate" type="checkbox" name="aggregate" /></p>
+  	<p><input type="submit" value="Generate"  /></p>
+  	<p><button onClick="meh()">Export</button></p>
 </form>
-<div id="container" style="height: 400px;display: none" ></div>
-<canvas id="canvas" width="1000px" height="600px" style="display:none;"></canvas> 
+<div id="container"></div>
+<canvas id="canvas" style="display:none;"></canvas> 
 
 
 </body>
