@@ -79,13 +79,12 @@
         });
         return false;
 	});
-	document.get
 	document.getElementById("canvas").style.display = "none";
 	document.getElementById("container").style.display = "inline";
 	});
 function meh() {
-  document.getElementById("canvas").style.display = "inline";
-  document.getElementById("container").style.display = "none";
+  document.getElementById("canvas").style.display = "none";
+  document.getElementById("container").style.display = "inline";
   canvg('canvas', $('#container .highcharts-container').html());
   var data = document.getElementById("canvas").toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href = data;
